@@ -54,4 +54,7 @@ public partial class Student
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
     public virtual ICollection<Violation> Violations { get; set; } = new List<Violation>();
+
+    public string? PasswordHash { get; set; }
+
 }
