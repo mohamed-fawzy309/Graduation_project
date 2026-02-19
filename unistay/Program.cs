@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using unistay.Data;
+
 namespace unistay
 {
     public class Program
@@ -6,8 +9,12 @@ namespace unistay
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+
+            builder.Services.AddDbContext<UniStayDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("UniStayConnection")));
+
 
             var app = builder.Build();
 
@@ -15,7 +22,6 @@ namespace unistay
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
